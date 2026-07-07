@@ -1,5 +1,5 @@
 ## Game of Life
-In this project I am trying to replicate Conway's Game of Life.
+In this project I am trying to replicate Conway's Game of Life using C and SDL.
 
 Useful resources:
  - [wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
@@ -23,5 +23,5 @@ cmake --build build
 
 Run the app, it will display available options:
 ``` bash
-./build/app
+./build/Debug/app
 ```
