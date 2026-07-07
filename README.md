@@ -1,6 +1,9 @@
 ## Game of Life
 In this project I am trying to replicate Conway's Game of Life.
 
+Useful resources:
+ - [wikipedia](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life)
+
 ## Installation & Compliation
 Get the repository:
 ``` bash
