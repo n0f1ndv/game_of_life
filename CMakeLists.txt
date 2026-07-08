@@ -12,6 +12,7 @@ set(CMAKE_C_EXTENSIONS OFF)
 
 add_executable(app
     src/main.c
+    src/board.c
 )
 
 target_include_directories(app
