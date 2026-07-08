@@ -1,25 +1,72 @@
 #include <stdio.h>
-
-#include <SDL3/SDL.h>
+#include <stdlib.h>
 
 #include "board.h"
-#include "cell.h"
 
 void init_board(struct Cell board[CELLS_Y][CELLS_X]) {
+    FILE *fptr = fopen("res/init_board.txt", "r");
+
+    char ch;
     for (int i = 0; i < CELLS_Y; i++) {
         for (int j = 0; j < CELLS_X; j++) {
-            if ((i + j) % 2 == 0)
-                board[i][j].value = 0;
-            else 
-                board[i][j].value = 1;
+            ch = fgetc(fptr);
+            board[i][j].value = atoi(&ch);
+            board[i][j].neighbors = 0;
         }
     }
+
+    fclose(fptr);
 }
 
 void calculate_neighbors(struct Cell board[CELLS_Y][CELLS_X]) {
+    int tmp_x[2] = {0, 0};
+    int tmp_y[2] = {0, 0};
+
     for (int i = 0; i < CELLS_Y; i++) {
         for (int j = 0; j < CELLS_X; j++) {
+            if (i - 1 < 0) 
+                tmp_y[0] = CELLS_Y - 1;
+            else
+                tmp_y[0] = i - 1;
 
+            if (i + 1 == CELLS_Y)
+                tmp_y[1] = 0;
+            else
+                tmp_y[1] = i + 1;
+
+            if (j - 1 < 0) 
+                tmp_x[0] = CELLS_X - 1;
+            else
+                tmp_x[0] = j - 1;
+
+            if (j + 1 == CELLS_X)
+                tmp_x[1] = 0;
+            else
+                tmp_x[1] = j + 1;
+
+            if (board[tmp_y[0]][tmp_x[1]].value == 1) // NW
+                board[i][j].neighbors++;
+
+            if (board[i][tmp_x[1]].value == 1)   // N
+                board[i][j].neighbors++;
+
+            if (board[tmp_y[1]][tmp_x[1]].value == 1) // NE
+                board[i][j].neighbors++;
+
+            if (board[tmp_y[0]][j].value == 1)   // W
+                board[i][j].neighbors++;
+
+            if (board[tmp_y[1]][j].value == 1)   // E
+                board[i][j].neighbors++;
+
+            if (board[tmp_y[0]][tmp_x[0]].value == 1) // SW
+                board[i][j].neighbors++;
+
+            if (board[i][tmp_x[0]].value == 1)   // S
+                board[i][j].neighbors++;
+
+            if (board[tmp_y[1]][tmp_x[0]].value == 1) // SE
+                board[i][j].neighbors++;
         }
     }
 }

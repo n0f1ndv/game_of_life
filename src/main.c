@@ -2,7 +2,6 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 
-#include "cell.h"
 #include "board.h"
 
 static SDL_Window *window = NULL;
@@ -38,7 +37,11 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event)
 
     if (event->type == SDL_EVENT_KEY_DOWN) {
         switch (event->key.scancode) {
-            case SDL_SCANCODE_A: update_board(board); break;
+            case SDL_SCANCODE_A: { 
+                calculate_neighbors(board);
+                update_board(board); 
+                break;
+            }
         }
     }
 
