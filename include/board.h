@@ -7,7 +7,7 @@
 #define CELLS_SIZE 10
 
 void init_board();
-void udpate_board();
+void update_board();
 void draw_board();
 
 #endif

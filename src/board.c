@@ -16,7 +16,14 @@ void init_board(int board[WINDOW_HEIGHT / CELLS_SIZE][WINDOW_WIDTH / CELLS_SIZE]
 }
 
 void update_board(int board[WINDOW_HEIGHT / CELLS_SIZE][WINDOW_WIDTH / CELLS_SIZE]) {
-
+    for (int i = 0; i < WINDOW_HEIGHT / CELLS_SIZE; i++) {
+        for (int j = 0; j < WINDOW_WIDTH / CELLS_SIZE; j++) {
+            if (board[i][j] == 0)
+                board[i][j] = 1;
+            else 
+                board[i][j] = 0;
+        }
+    }
 }
 
 void draw_board(SDL_Renderer *renderer, int board[WINDOW_HEIGHT / CELLS_SIZE][WINDOW_WIDTH / CELLS_SIZE]) {
