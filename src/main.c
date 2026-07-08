@@ -2,12 +2,13 @@
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 
+#include "cell.h"
 #include "board.h"
 
 static SDL_Window *window = NULL;
 static SDL_Renderer *renderer = NULL;
 
-static int board[WINDOW_HEIGHT / CELLS_SIZE][WINDOW_WIDTH / CELLS_SIZE];
+static struct Cell board[CELLS_Y][CELLS_X];
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char *argv[])
 {
