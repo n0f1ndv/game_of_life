@@ -14,7 +14,7 @@ struct Cell {
     int neighbors; // value from [0, 8] range
 };
 
-void init_board(struct Cell board[CELLS_Y][CELLS_X]);
+void init_board(const char *file_path, struct Cell board[CELLS_Y][CELLS_X]);
 void calculate_neighbors(struct Cell board[CELLS_Y][CELLS_X]);
 void update_board(struct Cell board[CELLS_Y][CELLS_X]);
 void draw_board(SDL_Renderer *renderer, struct Cell board[CELLS_Y][CELLS_X]);

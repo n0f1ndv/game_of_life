@@ -1,17 +1,41 @@
 #include <stdio.h>
-#include <stdlib.h>
+#include <string.h>
 
 #include "board.h"
 
-void init_board(struct Cell board[CELLS_Y][CELLS_X]) {
-    FILE *fptr = fopen("res/init_board.txt", "r");
+void init_board(const char *file_path, struct Cell board[CELLS_Y][CELLS_X]) {
+    // TODO:
+    // Fix reading from file because it's broken
+    FILE *fptr = fopen(file_path, "r");
 
-    char ch;
-    for (int i = 0; i < CELLS_Y; i++) {
-        for (int j = 0; j < CELLS_X; j++) {
-            ch = fgetc(fptr);
-            board[i][j].value = atoi(&ch);
-            board[i][j].neighbors = 0;
+    if (fptr == NULL) {
+        fprintf(stderr, "Couldn't open file %s\n", file_path);
+        return;
+    }
+
+    char line[CELLS_X + 10];
+
+    for (int y = 0; y < CELLS_Y; y++) {
+        if (fgets(line, sizeof(line), fptr) == NULL) {
+            fprintf(stderr, "Error: Unexpected end of file at row %d\n", y);
+            break;
+        }
+
+        // Parse each character in the line
+        for (int x = 0; x < CELLS_X; x++) {
+            if (line[x] == '0') {
+                board[y][x].value = 0;
+            } else if (line[x] == '1') {
+                board[y][x].value = 1;
+            } else if (line[x] == '\n' || line[x] == '\0') {
+                fprintf(stderr, "Warning: Row %d has fewer than %d columns\n", y, CELLS_X);
+                board[y][x].value = 0;
+            } else {
+                fprintf(stderr, "Warning: Invalid character '%c' at row %d, col %d\n", line[x], y, x);
+                board[y][x].value = 0; 
+            }
+
+            board[y][x].neighbors = 0;
         }
     }
 
@@ -24,6 +48,7 @@ void calculate_neighbors(struct Cell board[CELLS_Y][CELLS_X]) {
 
     for (int i = 0; i < CELLS_Y; i++) {
         for (int j = 0; j < CELLS_X; j++) {
+            // This parser connects ends of board together
             if (i - 1 < 0) 
                 tmp_y[0] = CELLS_Y - 1;
             else
@@ -78,7 +103,7 @@ void update_board(struct Cell board[CELLS_Y][CELLS_X]) {
             if (board[i][j].value == 1) {
                 if (board[i][j].neighbors < 2 || board[i][j].neighbors > 3)
                     board[i][j].value = 0;
-                else
+                else if (board[i][j].neighbors == 2)
                     board[i][j].value = 1;
             }
             // Calculations for dead cells
