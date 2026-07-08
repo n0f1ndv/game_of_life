@@ -4,8 +4,6 @@
 #include "board.h"
 
 void init_board(const char *file_path, struct Cell board[CELLS_Y][CELLS_X]) {
-    // TODO:
-    // Fix reading from file because it's broken
     FILE *fptr = fopen(file_path, "r");
 
     if (fptr == NULL) {
@@ -21,7 +19,6 @@ void init_board(const char *file_path, struct Cell board[CELLS_Y][CELLS_X]) {
             break;
         }
 
-        // Parse each character in the line
         for (int x = 0; x < CELLS_X; x++) {
             if (line[x] == '0') {
                 board[y][x].value = 0;
