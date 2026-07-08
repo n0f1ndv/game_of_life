@@ -66,28 +66,28 @@ void calculate_neighbors(struct Cell board[CELLS_Y][CELLS_X]) {
             else
                 tmp_x[1] = j + 1;
 
-            if (board[tmp_y[0]][tmp_x[1]].value == 1) // NW
+            if (board[tmp_y[0]][tmp_x[1]].value == 1)   // NW
                 board[i][j].neighbors++;
 
-            if (board[i][tmp_x[1]].value == 1)   // N
+            if (board[i][tmp_x[1]].value == 1)          // N
                 board[i][j].neighbors++;
 
-            if (board[tmp_y[1]][tmp_x[1]].value == 1) // NE
+            if (board[tmp_y[1]][tmp_x[1]].value == 1)   // NE
                 board[i][j].neighbors++;
 
-            if (board[tmp_y[0]][j].value == 1)   // W
+            if (board[tmp_y[0]][j].value == 1)          // W
                 board[i][j].neighbors++;
 
-            if (board[tmp_y[1]][j].value == 1)   // E
+            if (board[tmp_y[1]][j].value == 1)          // E
                 board[i][j].neighbors++;
 
-            if (board[tmp_y[0]][tmp_x[0]].value == 1) // SW
+            if (board[tmp_y[0]][tmp_x[0]].value == 1)   // SW
                 board[i][j].neighbors++;
 
-            if (board[i][tmp_x[0]].value == 1)   // S
+            if (board[i][tmp_x[0]].value == 1)          // S
                 board[i][j].neighbors++;
 
-            if (board[tmp_y[1]][tmp_x[0]].value == 1) // SE
+            if (board[tmp_y[1]][tmp_x[0]].value == 1)   // SE
                 board[i][j].neighbors++;
         }
     }
@@ -100,7 +100,7 @@ void update_board(struct Cell board[CELLS_Y][CELLS_X]) {
             if (board[i][j].value == 1) {
                 if (board[i][j].neighbors < 2 || board[i][j].neighbors > 3)
                     board[i][j].value = 0;
-                else if (board[i][j].neighbors == 2)
+                else if (board[i][j].neighbors == 2 || board[i][j].neighbors == 3)
                     board[i][j].value = 1;
             }
             // Calculations for dead cells

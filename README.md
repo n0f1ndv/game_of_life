@@ -33,5 +33,4 @@ Run the app, it will display available options:
 ```
 
 ## Usage
-Keyboard:
- - a - Next Generation
+Press *a* key to go to next generation, hold *a* to let simulation go.
