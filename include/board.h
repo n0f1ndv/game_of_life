@@ -7,9 +7,9 @@
 #define CELLS_X (WINDOW_WIDTH / CELLS_SIZE)
 #define CELLS_Y (WINDOW_HEIGHT / CELLS_SIZE)
 
-void calculate_neighbors();
-void init_board();
-void update_board();
-void draw_board();
+void init_board(struct Cell board[CELLS_Y][CELLS_X]);
+void calculate_neighbors(struct Cell board[CELLS_Y][CELLS_X]);
+void update_board(struct Cell board[CELLS_Y][CELLS_X]);
+void draw_board(SDL_Renderer *renderer, struct Cell board[CELLS_Y][CELLS_X]);
 
 #endif

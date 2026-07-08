@@ -16,13 +16,29 @@ void init_board(struct Cell board[CELLS_Y][CELLS_X]) {
     }
 }
 
+void calculate_neighbors(struct Cell board[CELLS_Y][CELLS_X]) {
+    for (int i = 0; i < CELLS_Y; i++) {
+        for (int j = 0; j < CELLS_X; j++) {
+
+        }
+    }
+}
+
 void update_board(struct Cell board[CELLS_Y][CELLS_X]) {
     for (int i = 0; i < CELLS_Y; i++) {
         for (int j = 0; j < CELLS_X; j++) {
-            if (board[i][j].value == 0)
-                board[i][j].value = 1;
-            else 
-                board[i][j].value = 0;
+            // Calculations for living cells
+            if (board[i][j].value == 1) {
+                if (board[i][j].neighbors < 2 || board[i][j].neighbors > 3)
+                    board[i][j].value = 0;
+                else
+                    board[i][j].value = 1;
+            }
+            // Calculations for dead cells
+            else { 
+                if (board[i][j].neighbors == 3)
+                    board[i][j].value = 1;
+            }
         }
     }
 }
